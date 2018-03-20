@@ -10,7 +10,6 @@ app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Palette Picker';
 
 app.use(bodyParser.json());
-app.use(express.static('public'))
 
 const requireHTTPS = (req, res, next) => {
   if (req.headers['x-forwarded-proto'] !== 'https') {
@@ -22,6 +21,8 @@ const requireHTTPS = (req, res, next) => {
 app.enable('trust proxy');
 
 if (process.env.NODE_ENV === 'production') { app.use(requireHTTPS); }
+
+app.use(express.static('public'))
 
 app.get('/', (request, response) => {
 
